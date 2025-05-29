@@ -1,5 +1,6 @@
 ﻿using Mega_Batch_Printing.Helpers;
 using Mega_Batch_Printing.Models;
+using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
@@ -47,10 +48,19 @@ namespace Mega_Batch_Printing
 
         private void PrintButton_Click(object sender, RoutedEventArgs e)
         {
+            if (filesToPrint.Count == 0)
+            {
+                MessageBox.Show("No files to print.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+
             foreach (var job in filesToPrint)
             {
                 try
                 {
+                    job.Status = "Printing"; // Set status to Printing
+                    FilesListBox.Items.Refresh();
                     switch (job.FileType.ToLower())
                     {
                         case ".pdf":
@@ -81,11 +91,39 @@ namespace Mega_Batch_Printing
                             job.Status = "Unsupported";
                             continue;
                     }
-                    job.Status = "Printed";
+                    job.Status = "Printed"; // Set status to Printed
+                    FilesListBox.Items.Refresh();
                 }
                 catch
                 {
                     job.Status = "Failed";
+                    FilesListBox.Items.Refresh();
+                }
+            }
+
+        }
+
+        private void OpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new()
+            {
+                Filter = "Files (*.pdf; *.doc; *.docx; *.xls; *.xlsx; *.ppt; *.pptx; *.jpg; *.jpeg; *.png; *.tiff; *.txt;)| *.pdf; *.doc; *.docx; *.xls; *.xlsx; *.ppt; *.pptx; *.jpg; *.jpeg; *.png; *.tiff; *.txt;",
+                Title = "Select files",
+                Multiselect = true,
+                CheckFileExists = true,   // Ensure selected file exists
+                CheckPathExists = true    // Ensure selected path exists
+            };
+
+            // Show the dialog and check if the user selected a file
+            if (openFileDialog.ShowDialog() == true)
+            {
+                int number = 1;
+                foreach (string file in openFileDialog.FileNames)
+                {
+                    if (File.Exists(file))
+                    {
+                        filesToPrint.Add(new PrintJob { Number = number++, FilePath = file, FileType = Path.GetExtension(file) });
+                    }
                 }
             }
         }

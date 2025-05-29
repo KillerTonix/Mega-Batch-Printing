@@ -7,18 +7,15 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
         Title="Mega Batch Printing" Height="650" Width="1000">
-    
-    
+
+
     <Grid Background="#FF1E1E1E">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Image gif:ImageBehavior.AnimatedSource="C:\Users\arturt\Downloads\Loading.gif"/>
-
-        <Button x:Name="PrintButton" Grid.Column="1"  Content="Print" Height="50" VerticalAlignment="Bottom" Click="PrintButton_Click" Background="#FF51D684" FontSize="36" FontWeight="Bold"/>
-        <ListView x:Name="FilesListBox"  Grid.Column="0"  ItemsSource="{Binding filesToPrint}" d:ItemsSource="{d:SampleData ItemCount=5}" AllowDrop="True" DragEnter="FilesListBox_DragEnter" Drop="FilesListBox_Drop" DragLeave="FilesListBox_DragLeave" FontSize="12" Visibility="Hidden">
+        <ListView x:Name="FilesListBox" Margin="20" Grid.Column="0"  ItemsSource="{Binding filesToPrint}" d:ItemsSource="{d:SampleData ItemCount=5}" AllowDrop="True" DragEnter="FilesListBox_DragEnter" Drop="FilesListBox_Drop" DragLeave="FilesListBox_DragLeave" FontSize="12" Background="#FF383838" Foreground="White">
             <ListView.View>
                 <GridView>
                     <!-- # column -->
@@ -31,10 +28,16 @@
                     <GridViewColumn x:Name="FileTypeHeader" Header="FileType" DisplayMemberBinding="{Binding FileType}"/>
 
                     <!-- Status column -->
-                    <GridViewColumn x:Name="StatusHeader" Header="Status" DisplayMemberBinding="{Binding Status}"/>
+                    <GridViewColumn x:Name="StatusHeader" Header="Status" DisplayMemberBinding="{Binding Status}" Width="120"/>
 
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <Button x:Name="OpenButton" Margin="20" Grid.Column="1"  Content="Open" Height="50" VerticalAlignment="Top" Click="OpenButton_Click" Background="#FF036FC3" FontSize="30" FontWeight="Bold"/>
+        <Button x:Name="PrintButton" Margin="20" Grid.Column="1"  Content="Print" Height="50" VerticalAlignment="Bottom" Click="PrintButton_Click" Background="#FF92E492" FontSize="30" FontWeight="Bold"/>
+        <Border x:Name="LoadingImageBorder" Width="128" Height="128" Background="AliceBlue" Visibility="Hidden">
+            <Image x:Name="LoadingImage" gif:ImageBehavior.AnimatedSource="C:\Users\arturt\Downloads\Loading1.gif" Width="128" Height="128" Visibility="Hidden"/>
+        </Border>
     </Grid>
 </Window>
