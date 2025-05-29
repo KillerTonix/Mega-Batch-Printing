@@ -1,5 +1,5 @@
-# BatchPrint.NET
-BatchPrint.NET is a free, open-source batch printing utility for Windows that allows you to send multiple files to the printer at once.
+# Mega Batch Printing
+Mega Batch Printing is a free, open-source batch printing utility for Windows that allows you to send multiple files to the printer at once.
 
 ## Supported Formats
 - PDF
