@@ -7,6 +7,7 @@ Mega Batch Printing is a free, open-source batch printing utility for Windows th
 - Excel (.xls/.xlsx)
 - PowerPoint (.ppt/.pptx)
 - Images (.jpg, .png, .tiff)
+- Text (.txt)
 
 ## Features
 - Add multiple files of different types
