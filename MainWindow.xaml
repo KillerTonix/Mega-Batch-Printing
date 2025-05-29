@@ -1,0 +1,40 @@
+﻿<Window x:Class="Mega_Batch_Printing.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mega_Batch_Printing"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        mc:Ignorable="d"
+        Title="Mega Batch Printing" Height="650" Width="1000">
+    
+    
+    <Grid Background="#FF1E1E1E">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image gif:ImageBehavior.AnimatedSource="C:\Users\arturt\Downloads\Loading.gif"/>
+
+        <Button x:Name="PrintButton" Grid.Column="1"  Content="Print" Height="50" VerticalAlignment="Bottom" Click="PrintButton_Click" Background="#FF51D684" FontSize="36" FontWeight="Bold"/>
+        <ListView x:Name="FilesListBox"  Grid.Column="0"  ItemsSource="{Binding filesToPrint}" d:ItemsSource="{d:SampleData ItemCount=5}" AllowDrop="True" DragEnter="FilesListBox_DragEnter" Drop="FilesListBox_Drop" DragLeave="FilesListBox_DragLeave" FontSize="12" Visibility="Hidden">
+            <ListView.View>
+                <GridView>
+                    <!-- # column -->
+                    <GridViewColumn x:Name="NumberHeader" Header="#" DisplayMemberBinding="{Binding Number}"/>
+
+                    <!-- FilePath column -->
+                    <GridViewColumn x:Name="FilePathHeader" Header="FilePath" DisplayMemberBinding="{Binding FilePath}" />
+
+                    <!-- FileType column -->
+                    <GridViewColumn x:Name="FileTypeHeader" Header="FileType" DisplayMemberBinding="{Binding FileType}"/>
+
+                    <!-- Status column -->
+                    <GridViewColumn x:Name="StatusHeader" Header="Status" DisplayMemberBinding="{Binding Status}"/>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
